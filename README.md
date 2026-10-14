@@ -1,113 +1,158 @@
+<div align="center">
+
+<br />
+
+<a href="https://github.com/Paidguy/statsfm">
+  <img src="public/favicon.svg" alt="statsFM Logo" width="76" height="76" />
+</a>
+
 # statsFM
 
-statsFM is a React + TypeScript app that analyzes public Last.fm profiles and turns listening history into a clear, visual report.
+**Turn your Last.fm listening history into deep music insights and shareable posters.**
 
-**Live app:** https://paidguy.me/statsFM
+<br />
 
-## Features
+[![CI](https://img.shields.io/github/actions/workflow/status/Paidguy/statsfm/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI&color=000000&labelColor=141414)](.github/workflows/ci.yml)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/Paidguy/statsfm/deploy.yml?branch=main&style=for-the-badge&logo=github&logoColor=white&label=DEPLOY&color=000000&labelColor=141414)](.github/workflows/deploy.yml)
+[![TypeScript](https://img.shields.io/badge/TYPESCRIPT-5.X-000000?style=for-the-badge&logo=typescript&logoColor=white&labelColor=141414)](tsconfig.json)
+[![Vite](https://img.shields.io/badge/VITE-BUNDLER-000000?style=for-the-badge&logo=vite&logoColor=white&labelColor=141414)](vite.config.ts)
+[![License](https://img.shields.io/badge/LICENSE-MIT-000000?style=for-the-badge&labelColor=141414)](LICENSE)
 
-- Last.fm profile lookup with period filters (`1month`, `6month`, `12month`, `overall`)
-- Six-dimension taste ratings with plain-language explanations
-- Charts for hourly and weekday listening behavior
-- Top artists, tracks, albums, and decade distribution views
-- Recap modal with exportable 9:16 and 1:1 images
-- Festival lineup poster export from top artists
-- Optional server-side Last.fm proxy with caching
+<br />
 
-## Tech stack
+<p align="center">
+  <a href="#-features"><b>Features</b></a> &nbsp;·&nbsp;
+  <a href="#-tech-stack"><b>Tech Stack</b></a> &nbsp;·&nbsp;
+  <a href="#-quick-start"><b>Quick Start</b></a> &nbsp;·&nbsp;
+  <a href="#-project-structure"><b>Structure</b></a> &nbsp;·&nbsp;
+  <a href="#-contributing"><b>Contributing</b></a>
+</p>
 
-- React 19 + TypeScript
-- Vite 8 + Tailwind CSS 4
-- Express (optional production proxy/server)
+<br />
 
-## Getting started
+</div>
 
-### Prerequisites
+---
 
-- Node.js 20+
-- npm
+## ✦ Features
 
-### Install
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🎧 &nbsp;Deep Music Insights</h3>
+      <p>Goes beyond simple play counts. Discover your unique taste rating, how varied your artist rotation is, and which decades of music you listen to the most.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📊 &nbsp;Listening Habits & Charts</h3>
+      <p>See exactly when you listen to music with 24-hour activity charts, weekly heatmaps, and a live speedometer that tracks your daily listening pace.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🖼️ &nbsp;Shareable Posters & Recaps</h3>
+      <p>Turn your top artists and tracks into high-resolution festival lineup posters, artist spotlight cards, and vertical story recaps ready to download and share.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>⚡ &nbsp;Fast, Clean & Private</h3>
+      <p>Designed with a smooth, minimalist interface, a live "Now Playing" ticker, and a built-in backend server that keeps your Last.fm API key completely hidden.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## ✦ Tech Stack
+
+| Part | Built With | What It Does |
+| :--- | :--- | :--- |
+| **Frontend** | React, TypeScript, Vite | Powers the user interface, interactive charts, and fast page loads |
+| **Analytics** | Custom Insights Engine | Calculates taste scores, decade breakdowns, and listening patterns |
+| **Backend** | Node.js (`server.ts`) | Fetches data from Last.fm, caches results, and protects your API key |
+| **Automation** | GitHub Actions | Automatically tests code (`ci.yml`) and deploys updates (`deploy.yml`) |
+
+---
+
+## ✦ Quick Start
+
+### 1. What You Need
+* **Node.js** (v18 or newer) and **npm**
+* A free **[Last.fm API Key](https://www.last.fm/api/account/create)**
+
+### 2. Install & Set Up
 
 ```bash
-git clone https://github.com/paidguy/statsFM.git
-cd statsFM
+# Clone the repository
+git clone [https://github.com/Paidguy/statsfm.git](https://github.com/Paidguy/statsfm.git)
+cd statsfm
+
+# Install packages
 npm install
-```
 
-### Run locally
-
-```bash
-npm run dev
-```
-
-Open http://localhost:3000.
-
-### Type check and build
-
-```bash
-npm run lint
-npm run build
-```
-
-### Run the Express server
-
-Build first, then run:
-
-```bash
-npm run build
-npm start
-```
-
-## Environment variables
-
-Copy `.env.example` to `.env` if needed:
-
-```bash
+# Create your environment file
 cp .env.example .env
 ```
 
-| Variable | Purpose | Default |
-| --- | --- | --- |
-| `LASTFM_API_KEY` | API key used by `server.ts` proxy | Built-in fallback key |
-| `VITE_LASTFM_API_KEY` | API key used by client-side direct requests | Built-in fallback key |
-| `PORT` | Local port for Vite/Express | `3000` |
-| `APP_URL` | Canonical app URL for metadata | `https://paidguy.me/statsfm` |
+### 3. Add Your API Key
 
-## Architecture
+Open the `.env` file and paste your Last.fm API key:
 
-statsFM supports two runtime modes:
+| Variable | Required | Description |
+| :--- | :---: | :--- |
+| `LASTFM_API_KEY` | **Yes** | Your personal Last.fm API key (kept safe on the server) |
+| `PORT` | Optional | Custom port for the local server |
 
-1. **Static mode (GitHub Pages / static hosts):** client calls Last.fm directly with CORS and client-side caching.
-2. **Server mode (Node/Express):** `/api/lastfm` proxy handles requests with method allow-listing and in-memory caching.
+### 4. Run the App
 
-## Project structure
+```bash
+# Start the app in development mode
+npm run dev
 
-```text
-src/
-  api/            # Last.fm client and fetch orchestration
-  components/     # UI components, modals, charts, exports
-  server/         # Last.fm proxy handler shared by Vite + Express
-  types/          # API and app data types
-  utils/          # scoring and analytics logic
-server.ts         # Express entrypoint for server mode
-.github/workflows # CI and GitHub Pages deployment
+# Build the app for production
+npm run build
 ```
 
-## Deployment
+---
 
-### GitHub Pages
+## ✦ Project Structure
 
-The repository includes `.github/workflows/deploy.yml`.
+```text
+statsFM/
+├── .github/                 # Automated testing, deployment & issue templates
+├── public/                  # App icon, static files & 404 error page
+├── src/
+│   ├── api/                 # Connects the frontend to the backend server
+│   ├── components/          # UI screens, charts, heatmaps & poster generators
+│   ├── server/              # Handles Last.fm API requests and caching
+│   ├── types/               # TypeScript data definitions
+│   ├── utils/               # Math and logic for insights and decade tracking
+│   ├── App.tsx              # Main page layout
+│   └── main.tsx             # App starting point
+├── .env.example             # Sample environment file
+├── server.ts                # Backend server entry file
+└── vite.config.ts           # Build and bundler settings
+```
 
-1. Enable **GitHub Actions** as the Pages source.
-2. Push to `main` (or run the workflow manually).
-3. The workflow builds and deploys `dist/`.
+---
 
-## Contributing
+## ✦ Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+Want to report a bug, suggest a feature, or submit code? Check out [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
-## License
+1. Fork this repository
+2. Create a new branch (`git checkout -b feat/your-feature`)
+3. Commit your changes (`git commit -m 'feat: add your feature'`)
+4. Push to the branch (`git push origin feat/your-feature`)
+5. Open a Pull Request
 
-[MIT](./LICENSE)
+---
+
+<div align="center">
+
+<br />
+
+Released under the [MIT License](LICENSE).  
+Built by [**@Paidguy**](https://github.com/Paidguy)
+
+<br />
+
+</div>
