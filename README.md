@@ -2,7 +2,7 @@
 
 statsFM is a React + TypeScript app that analyzes public Last.fm profiles and turns listening history into a clear, visual report.
 
-**Live app:** https://paidguy.me/statsfm
+**Live app:** https://paidguy.me/statsFM
 
 ## Features
 
