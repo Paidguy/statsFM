@@ -1,0 +1,49 @@
+name: Bug Report
+description: File a bug report to help improve statsFM
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue with **statsFM**!
+  - type: input
+    id: lastfm_username
+    attributes:
+      label: Last.fm Username (Optional)
+      description: If the issue occurred while fetching a specific profile, share it so we can reproduce it.
+      placeholder: e.g. rj
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Tell us what went wrong...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Enter username '...'
+        2. Select period '...'
+        3. Click on '...'
+        4. See error '...'
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Hosting Environment / Browser
+      options:
+        - paidguy.me/statsfm (Live Demo / GitHub Pages)
+        - Local Development (Vite / localhost:3000)
+        - Self-Hosted Express Server (Node.js)
+        - Mobile Browser (Safari iOS / Chrome Android)
+        - Other
+    validations:
+      required: true

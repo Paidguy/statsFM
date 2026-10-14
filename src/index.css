@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #101626;
+    --bg-panel: #18203a;
+    --text-primary: #f1ebdc;
+    --text-muted: #98a1ba;
+    --ink-pink: #ff5c9a;
+    --ink-aqua: #3fd6c6;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-variation-settings: 'wdth' 92, 'wght' 400;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-variation-settings: 'wdth' 75, 'wght' 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 2px solid var(--ink-aqua);
+    outline-offset: 3px;
+  }
+}
+
+.heading-bricolage {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 75, 'wght' 800;
+}
+
+.body-bricolage {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 92, 'wght' 400;
+}
+
+.body-bricolage-bold {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 92, 'wght' 700;
+}
+
+.prose-measure {
+  max-width: 65ch;
+}
+
+/* Touch targets >= 44px */
+.min-touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Print / Risograph motif */
+.risograph-blend {
+  mix-blend-mode: screen;
+}
+
+/* Prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #2b3658 #101626;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101626;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232d4b;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3fd6c6;
+}
+

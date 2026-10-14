@@ -1,0 +1,6 @@
+{
+  "name": "statsFM",
+  "description": "statsFM connects to your Last.fm profile to calculate your 6-dimension music taste scorecard, listening habits, and silkscreen festival lineup poster.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

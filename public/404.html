@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>statsFM</title>
+    <script>
+      // Single Page Application redirect script for GitHub Pages
+      // Encodes path and query string so index.html can restore the state
+      var pathSegmentsToKeep = 1; // 1 segment for repository name when not on apex custom domain
+      var l = window.location;
+      var repoPath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+      
+      // If deployed at paidguy.me/statsfm, redirect to base with query
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        (l.pathname.startsWith('/statsfm') ? '/statsfm/' : '/') +
+        (l.search ? l.search : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body style="background-color: #101626; color: #f1ebdc; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Redirecting to statsFM…</p>
+  </body>
+</html>
