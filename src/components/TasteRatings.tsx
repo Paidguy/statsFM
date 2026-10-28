@@ -132,32 +132,32 @@ export const TasteRatings: React.FC<TasteRatingsProps> = ({ ratings, persona, us
             <span>Simple, Honest Music Metrics</span>
           </div>
           <p>
-            We don’t use confusing algorithms or secret math. We look directly at the songs and artists you scrobbled on Last.fm:
+            Every rating is computed directly from your Last.fm scrobble history and global artist metadata for the selected time period:
           </p>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#f1ebdc] pt-1">
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
               <span className="text-[#ff5c9a] font-bold">1. Rarity:</span>
-              <span>We check how many of your artists appear in global Billboard top-40 charts vs indie releases.</span>
+              <span>Weighted from the real Last.fm global listener counts of your top artists (from millions of listeners down to niche indie acts).</span>
             </li>
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
-              <span className="text-[#3fd6c6] font-bold">2. Loyalty:</span>
-              <span>We measure what percentage of your total listening goes to your top 5 favorite musicians.</span>
+              <span className="text-[#3fd6c6] font-bold">2. Loyalty &amp; Variety:</span>
+              <span>Measures the exact share of your period plays spent on your top 5 artists versus total unique artists played.</span>
             </li>
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
               <span className="text-[#ff5c9a] font-bold">3. Song Looping:</span>
-              <span>We look at your most played song to see if you loop favorites or listen to entire albums.</span>
+              <span>Combines your #1 song’s replay count, top-track concentration, and library-wide plays per unique track.</span>
             </li>
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
-              <span className="text-[#3fd6c6] font-bold">4. Day vs Night:</span>
-              <span>We check the exact clock hour of your recent plays to see when your music plays most.</span>
+              <span className="text-[#3fd6c6] font-bold">4. Day vs. Night:</span>
+              <span>Analyzes up to 400 recent scrobbles in your local timezone to map daytime (6am–9pm) vs. late-night (10pm–5am) habits.</span>
             </li>
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
               <span className="text-[#ff5c9a] font-bold">5. Favorite Era:</span>
-              <span>We calculate the release decade of your most played albums to see your favorite decade.</span>
+              <span>Matches your top artists and albums against Last.fm artist biographies, decade tags, and album release years.</span>
             </li>
             <li className="flex items-start gap-2 bg-[#18203a] p-2.5 border border-[#232d4b]">
               <span className="text-[#3fd6c6] font-bold">6. Listening Appetite:</span>
-              <span>We count how many songs you play per day compared to normal daily listening averages.</span>
+              <span>Compares your daily plays in the selected period against your all-time daily average since joining Last.fm.</span>
             </li>
           </ul>
         </div>
@@ -169,6 +169,7 @@ export const TasteRatings: React.FC<TasteRatingsProps> = ({ ratings, persona, us
           {items.map((item, idx) => {
             const isPink = idx % 2 === 0;
             const isExpanded = expandedCardId === item.id;
+            const spectrumPos = item.spectrumPosition ?? item.score;
 
             return (
               <div
@@ -222,7 +223,7 @@ export const TasteRatings: React.FC<TasteRatingsProps> = ({ ratings, persona, us
                       className={`h-full transition-all duration-500 ${
                         isPink ? 'bg-[#ff5c9a]' : 'bg-[#3fd6c6]'
                       }`}
-                      style={{ width: `${Math.max(8, item.score)}%` }}
+                      style={{ width: `${Math.max(8, spectrumPos)}%` }}
                     />
                   </div>
 
@@ -278,6 +279,7 @@ export const TasteRatings: React.FC<TasteRatingsProps> = ({ ratings, persona, us
           <div className="space-y-6">
             {items.map((item, idx) => {
               const isPink = idx % 2 === 0;
+              const spectrumPos = item.spectrumPosition ?? item.score;
 
               return (
                 <div key={item.id} className="space-y-2">
@@ -304,12 +306,12 @@ export const TasteRatings: React.FC<TasteRatingsProps> = ({ ratings, persona, us
                             ? 'bg-gradient-to-r from-[#232d4b] to-[#ff5c9a]'
                             : 'bg-gradient-to-r from-[#232d4b] to-[#3fd6c6]'
                         }`}
-                        style={{ width: `${Math.max(6, item.score)}%` }}
+                        style={{ width: `${Math.max(6, spectrumPos)}%` }}
                       />
                       {/* Indicator pip */}
                       <div
                         className="absolute top-0 bottom-0 w-1.5 bg-[#f1ebdc] -translate-x-1/2 shadow"
-                        style={{ left: `${item.score}%` }}
+                        style={{ left: `${spectrumPos}%` }}
                       />
                     </div>
 

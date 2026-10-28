@@ -31,6 +31,7 @@ export interface LastFmArtist {
 export interface LastFmTrack {
   name: string;
   playcount: string;
+  duration?: string;
   url: string;
   artist: {
     name: string;
@@ -68,6 +69,14 @@ export interface LastFmRecentTrack {
   '@attr'?: {
     nowplaying?: string;
   };
+}
+
+export interface ArtistEnrichedMeta {
+  name: string;
+  globalListeners: number;
+  globalPlaycount: number;
+  tags: string[];
+  bioSummary: string;
 }
 
 export interface HourCount {
@@ -145,6 +154,7 @@ export interface TasteRatingItem {
   id: string;
   title: string;
   score: number; // 0 to 100
+  spectrumPosition?: number; // 0 to 100 position between leftLabel and rightLabel
   letterGrade: string; // e.g. 'A+', 'S', 'A', 'B'
   grade: string; // friendly title, e.g. 'Underground Explorer'
   tagline: string;
@@ -168,10 +178,16 @@ export interface TasteRatingsSummary {
 
 export interface AggregatedStats {
   totalPlays: number;
+  lifetimePlays: number;
   registeredYear: number;
   daysOfMusic: number;
+  hoursOfMusic: number;
+  avgTrackSeconds: number;
   playsPerDay: number;
   totalArtists: number;
+  lifetimeArtists: number;
+  totalUniqueTracks: number;
+  totalUniqueAlbums: number;
   peakHour: number;
   peakHourCount: number;
   nightOwlPercentage: number;

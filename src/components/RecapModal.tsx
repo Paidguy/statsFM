@@ -215,10 +215,10 @@ statsFM · ${window.location.origin}/?u=${encodeURIComponent(user.name)}`;
             </div>
             <div className="p-6 bg-[#18203a] border-2 border-[#232d4b] w-full space-y-3">
               <p className="text-2xl sm:text-3xl text-[#f1ebdc] heading-bricolage">
-                That is about <span className="text-[#3fd6c6] font-bold">~{stats.daysOfMusic} full days</span> of non-stop music.
+                That is <span className="text-[#3fd6c6] font-bold">{stats.hoursOfMusic.toLocaleString()} hours</span> (~{stats.daysOfMusic} days) of non-stop music.
               </p>
               <p className="text-base text-[#98a1ba] body-bricolage">
-                You averaged about {stats.playsPerDay} songs every single day since {stats.registeredYear}, across {stats.totalArtists.toLocaleString()} different artists.
+                You averaged {stats.playsPerDay} songs a day ({periodLabel.toLowerCase()}), across {stats.totalArtists.toLocaleString()} different artists.
               </p>
             </div>
           </div>

@@ -184,27 +184,59 @@ export default function App() {
 
               {/* One paragraph of totals with emphasised numbers */}
               <p className="text-lg sm:text-xl text-[#98a1ba] body-bricolage prose-measure leading-relaxed">
-                You have played{' '}
-                <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
-                  {statsData.stats.totalPlays.toLocaleString()}
-                </strong>{' '}
-                tracks since{' '}
-                <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
-                  {statsData.stats.registeredYear}
-                </strong>
-                . That is about{' '}
-                <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
-                  {statsData.stats.daysOfMusic.toLocaleString()}
-                </strong>{' '}
-                full days of continuous music, averaging{' '}
-                <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
-                  {statsData.stats.playsPerDay.toLocaleString()}
-                </strong>{' '}
-                plays a day, across{' '}
-                <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
-                  {statsData.stats.totalArtists.toLocaleString()}
-                </strong>{' '}
-                different artists.
+                {period === 'overall' ? (
+                  <>
+                    You have played{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.totalPlays.toLocaleString()}
+                    </strong>{' '}
+                    tracks since{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.registeredYear}
+                    </strong>
+                    . That is about{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.daysOfMusic.toLocaleString()}
+                    </strong>{' '}
+                    days ({statsData.stats.hoursOfMusic.toLocaleString()} hours) of continuous music, averaging{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.playsPerDay.toLocaleString()}
+                    </strong>{' '}
+                    plays a day across{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.totalArtists.toLocaleString()}
+                    </strong>{' '}
+                    different artists.
+                  </>
+                ) : (
+                  <>
+                    In the{' '}
+                    <strong className="text-[#3fd6c6] font-bold body-bricolage-bold">
+                      {currentPeriodLabel.toLowerCase()}
+                    </strong>
+                    , you have played{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.totalPlays.toLocaleString()}
+                    </strong>{' '}
+                    tracks ({statsData.stats.hoursOfMusic.toLocaleString()} hours /{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.daysOfMusic.toLocaleString()}
+                    </strong>{' '}
+                    days of music), averaging{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.playsPerDay.toLocaleString()}
+                    </strong>{' '}
+                    plays a day across{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.totalArtists.toLocaleString()}
+                    </strong>{' '}
+                    artists (out of{' '}
+                    <strong className="text-[#f1ebdc] font-bold body-bricolage-bold">
+                      {statsData.stats.lifetimePlays.toLocaleString()}
+                    </strong>{' '}
+                    all-time plays since {statsData.stats.registeredYear}).
+                  </>
+                )}
               </p>
 
               {/* Action buttons: Open my recap & Export festival poster */}
@@ -326,7 +358,8 @@ export default function App() {
                     Listening by hour of day
                   </h3>
                   <p className="text-sm text-[#98a1ba]">
-                    What time of day you listen most based on your recent 200 tracks.
+                    What time of day you listen most based on your recent{' '}
+                    {statsData.hours.reduce((sum, h) => sum + h.count, 0)} dated plays.
                   </p>
                 </div>
                 <HourChart hours={statsData.hours} />
